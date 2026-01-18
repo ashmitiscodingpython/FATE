@@ -1,5 +1,6 @@
 import time
 import sys
+import json
 
 stops = [".", "!", "?"]
 
@@ -19,3 +20,21 @@ def narrate(text: str, WPM: float = 250):
         else:
             time.sleep(SPL)
     print("")
+
+def save(gender, name, data):
+    s = open("save.txt", "w")
+    sav = {"gender": gender, "name": name, "data": data}
+    json.dump(sav, s)
+    s.close()
+
+def check():
+    try:
+        open("save.txt")
+    except:
+        return True
+    return False
+
+def load():
+    s = open("save.txt")
+    data = json.load(s)
+    return data
